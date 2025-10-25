@@ -741,7 +741,8 @@
             currentFile: null,
             darkMode: localStorage.getItem('darkMode') === 'true',
             subjectStatus: JSON.parse(localStorage.getItem('subjectStatus') || '{}'),
-            quizScores: JSON.parse(localStorage.getItem('quizScores') || '{}')
+            quizScores: JSON.parse(localStorage.getItem('quizScores') || '{}'),
+            expandedSubjects: JSON.parse(localStorage.getItem('expandedSubjects') || '{}')
         };
 
         // Initialize
@@ -825,7 +826,19 @@
                             files: [
                                 { name: '01-java8-fundamentals.md', path: './Java8-Plus/notes/01-java8-fundamentals.md', size: '~25KB' },
                                 { name: '02-streams-api-deep-dive.md', path: './Java8-Plus/notes/02-streams-api-deep-dive.md', size: '~20KB' },
-                                { name: '03-java9-to-java21-features.md', path: './Java8-Plus/notes/03-java9-to-java21-features.md', size: '~22KB' }
+                                { name: '03-java9-to-java21-features.md', path: './Java8-Plus/notes/03-java9-to-java21-features.md', size: '~22KB' },
+                                { name: '04-completable-future.md', path: './Java8-Plus/notes/04-completable-future.md', size: '~30KB' },
+                                { name: '05-caching-strategies.md', path: './Java8-Plus/notes/05-caching-strategies.md', size: '~28KB' },
+                                { name: '06-thread-safety.md', path: './Java8-Plus/notes/06-thread-safety.md', size: '~35KB' },
+                                { name: '07-time-operations.md', path: './Java8-Plus/notes/07-time-operations.md', size: '~32KB' },
+                                { name: '08-advanced-completable-future-patterns.md', path: './Java8-Plus/notes/08-advanced-completable-future-patterns.md', size: '~40KB' },
+                                { name: '09-reactive-programming.md', path: './Java8-Plus/notes/09-reactive-programming.md', size: '~35KB' },
+                                { name: '10-distributed-caching-consistency.md', path: './Java8-Plus/notes/10-distributed-caching-consistency.md', size: '~38KB' },
+                                { name: '11-cache-performance-tuning.md', path: './Java8-Plus/notes/11-cache-performance-tuning.md', size: '~30KB' },
+                                { name: '12-advanced-cache-patterns.md', path: './Java8-Plus/notes/12-advanced-cache-patterns.md', size: '~25KB' },
+                                { name: '13-concurrent-collections-performance.md', path: './Java8-Plus/notes/13-concurrent-collections-performance.md', size: '~28KB' },
+                                { name: '14-time-operations-at-scale.md', path: './Java8-Plus/notes/14-time-operations-at-scale.md', size: '~32KB' },
+                                { name: '15-monitoring-observability-debugging.md', path: './Java8-Plus/notes/15-monitoring-observability-debugging.md', size: '~36KB' }
                             ]
                         },
                         'questions': {
@@ -853,7 +866,8 @@
                             name: 'Interview Prep',
                             icon: '🎤',
                             files: [
-                                { name: 'java8-interviews.md', path: './Java8-Plus/interview-questions/java8-interviews.md', size: '~25KB' }
+                                { name: 'java8-interviews.md', path: './Java8-Plus/interview-questions/java8-interviews.md', size: '~25KB' },
+                                { name: 'expert-architect-questions.md', path: './Java8-Plus/interview-questions/expert-architect-questions.md', size: '~40KB' }
                             ]
                         }
                     }
@@ -1010,12 +1024,13 @@
             container.innerHTML = '';
 
             for (const [key, subject] of Object.entries(state.subjects)) {
+                const isExpanded = state.expandedSubjects[key] || false;
                 const subjectEl = document.createElement('div');
-                subjectEl.className = `subject-item ${state.currentSubject === key ? 'active' : ''}`;
+                subjectEl.className = `subject-item ${state.currentSubject === key ? 'active' : ''} ${isExpanded ? 'expanded' : ''}`;
 
                 const btn = document.createElement('button');
                 btn.innerHTML = `<span>${subject.icon} ${subject.name}</span><span class="subject-item-toggle">›</span>`;
-                btn.addEventListener('click', () => selectSubject(key));
+                btn.addEventListener('click', () => toggleSubject(key));
                 subjectEl.appendChild(btn);
 
                 const filesEl = document.createElement('div');
@@ -1038,23 +1053,16 @@
             }
         }
 
-        // Select Subject
+        // Toggle Subject Expansion
+        function toggleSubject(subjectKey) {
+            state.expandedSubjects[subjectKey] = !state.expandedSubjects[subjectKey];
+            localStorage.setItem('expandedSubjects', JSON.stringify(state.expandedSubjects));
+            renderSubjects();
+            selectSubject(subjectKey);
+        }
+
+        // Select Subject (show overview)
         function selectSubject(subjectKey) {
-            const items = document.querySelectorAll('.subject-item');
-            items.forEach(item => {
-                item.classList.remove('active');
-                item.classList.remove('expanded');
-            });
-
-            const selected = Array.from(items).find(item =>
-                item.querySelector('button').textContent.includes(state.subjects[subjectKey].name)
-            );
-
-            if (selected) {
-                selected.classList.add('active');
-                selected.classList.add('expanded');
-            }
-
             state.currentSubject = subjectKey;
             showSubjectOverview(subjectKey);
         }
@@ -1136,7 +1144,6 @@
                 displayContent(file.name, sanitized, 'file');
                 updateBreadcrumb(subjectKey, folderName, file.name);
                 generateTableOfContents();
-                renderSubjects();
             } catch (error) {
                 console.error('Load error:', error);
                 const errorMsg = `
