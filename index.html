@@ -776,6 +776,13 @@
     </div>
 
     <script>
+        // Detect base path for GitHub Pages compatibility
+        let basePath = '/';
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('learn-claude')) {
+            basePath = currentPath.substring(0, currentPath.indexOf('learn-claude') + 'learn-claude'.length) + '/';
+        }
+
         // State management
         const state = {
             currentSubject: null,
@@ -783,7 +790,8 @@
             currentFileIndex: 0,
             currentFolderType: null,
             subjects: {},
-            isDarkMode: localStorage.getItem('darkMode') === 'true'
+            isDarkMode: localStorage.getItem('darkMode') === 'true',
+            basePath: basePath
         };
 
         // Initialize dashboard
@@ -799,165 +807,165 @@
             state.subjects = {
                 'React-TypeScript': {
                     name: 'React & TypeScript',
-                    path: './React-TypeScript',
+                    path: basePath + 'React-TypeScript',
                     icon: '⚛️',
                     folders: {
                         'notes': {
                             name: 'Notes',
                             icon: '📖',
                             files: [
-                                { name: '01-react-fundamentals.md', path: './React-TypeScript/notes/01-react-fundamentals.md', size: '~45KB' },
-                                { name: '02-advanced-patterns.md', path: './React-TypeScript/notes/02-advanced-patterns.md', size: '~52KB' },
-                                { name: '03-performance-optimization.md', path: './React-TypeScript/notes/03-performance-optimization.md', size: '~48KB' },
-                                { name: '04-testing-strategies.md', path: './React-TypeScript/notes/04-testing-strategies.md', size: '~42KB' },
-                                { name: '05-deployment-best-practices.md', path: './React-TypeScript/notes/05-deployment-best-practices.md', size: '~38KB' },
-                                { name: '09-enterprise-react-architecture.md', path: './React-TypeScript/notes/09-enterprise-react-architecture.md', size: '~62KB' }
+                                { name: '01-react-fundamentals.md', path: basePath + 'React-TypeScript/notes/01-react-fundamentals.md', size: '~45KB' },
+                                { name: '02-advanced-patterns.md', path: basePath + 'React-TypeScript/notes/02-advanced-patterns.md', size: '~52KB' },
+                                { name: '03-performance-optimization.md', path: basePath + 'React-TypeScript/notes/03-performance-optimization.md', size: '~48KB' },
+                                { name: '04-testing-strategies.md', path: basePath + 'React-TypeScript/notes/04-testing-strategies.md', size: '~42KB' },
+                                { name: '05-deployment-best-practices.md', path: basePath + 'React-TypeScript/notes/05-deployment-best-practices.md', size: '~38KB' },
+                                { name: '09-enterprise-react-architecture.md', path: basePath + 'React-TypeScript/notes/09-enterprise-react-architecture.md', size: '~62KB' }
                             ]
                         },
                         'interview-questions': {
                             name: 'Interview Prep',
                             icon: '🎤',
                             files: [
-                                { name: 'react-typescript-interview-questions.md', path: './React-TypeScript/interview-questions/react-typescript-interview-questions.md', size: '~38KB' }
+                                { name: 'react-typescript-interview-questions.md', path: basePath + 'React-TypeScript/interview-questions/react-typescript-interview-questions.md', size: '~38KB' }
                             ]
                         },
                         'real-problems': {
                             name: 'Coding Challenges',
                             icon: '💻',
                             files: [
-                                { name: 'react-typescript-coding-challenges.md', path: './React-TypeScript/real-problems/react-typescript-coding-challenges.md', size: '~48KB' }
+                                { name: 'react-typescript-coding-challenges.md', path: basePath + 'React-TypeScript/real-problems/react-typescript-coding-challenges.md', size: '~48KB' }
                             ]
                         },
                         'quiz': {
                             name: 'Quiz',
                             icon: '🎯',
                             files: [
-                                { name: 'react-typescript-quiz.md', path: './React-TypeScript/quiz/react-typescript-quiz.md', size: '~44KB' }
+                                { name: 'react-typescript-quiz.md', path: basePath + 'React-TypeScript/quiz/react-typescript-quiz.md', size: '~44KB' }
                             ]
                         }
                     }
                 },
                 'Java8-Plus': {
                     name: 'Java 8+',
-                    path: './Java8-Plus',
+                    path: basePath + 'Java8-Plus',
                     icon: '☕',
                     folders: {
                         'notes': {
                             name: 'Notes',
                             icon: '📖',
                             files: [
-                                { name: '01-java8-fundamentals.md', path: './Java8-Plus/notes/01-java8-fundamentals.md', size: '~50KB' },
-                                { name: '02-streams-api-deep-dive.md', path: './Java8-Plus/notes/02-streams-api-deep-dive.md', size: '~55KB' },
-                                { name: '03-java9-to-java21-features.md', path: './Java8-Plus/notes/03-java9-to-java21-features.md', size: '~65KB' },
-                                { name: '16-design-patterns.md', path: './Java8-Plus/notes/16-design-patterns.md', size: '~34KB' }
+                                { name: '01-java8-fundamentals.md', path: basePath + 'Java8-Plus/notes/01-java8-fundamentals.md', size: '~50KB' },
+                                { name: '02-streams-api-deep-dive.md', path: basePath + 'Java8-Plus/notes/02-streams-api-deep-dive.md', size: '~55KB' },
+                                { name: '03-java9-to-java21-features.md', path: basePath + 'Java8-Plus/notes/03-java9-to-java21-features.md', size: '~65KB' },
+                                { name: '16-design-patterns.md', path: basePath + 'Java8-Plus/notes/16-design-patterns.md', size: '~34KB' }
                             ]
                         },
                         'interview-questions': {
                             name: 'Interview Prep',
                             icon: '🎤',
                             files: [
-                                { name: 'java8-interview-questions.md', path: './Java8-Plus/interview-questions/java8-interview-questions.md', size: '~42KB' },
-                                { name: 'design-patterns-interview-questions.md', path: './Java8-Plus/interview-questions/design-patterns-interview-questions.md', size: '~32KB' }
+                                { name: 'java8-interview-questions.md', path: basePath + 'Java8-Plus/interview-questions/java8-interview-questions.md', size: '~42KB' },
+                                { name: 'design-patterns-interview-questions.md', path: basePath + 'Java8-Plus/interview-questions/design-patterns-interview-questions.md', size: '~32KB' }
                             ]
                         },
                         'real-problems': {
                             name: 'Coding Challenges',
                             icon: '💻',
                             files: [
-                                { name: 'java8-coding-challenges.md', path: './Java8-Plus/real-problems/java8-coding-challenges.md', size: '~55KB' },
-                                { name: 'design-patterns-coding-challenges.md', path: './Java8-Plus/real-problems/design-patterns-coding-challenges.md', size: '~48KB' }
+                                { name: 'java8-coding-challenges.md', path: basePath + 'Java8-Plus/real-problems/java8-coding-challenges.md', size: '~55KB' },
+                                { name: 'design-patterns-coding-challenges.md', path: basePath + 'Java8-Plus/real-problems/design-patterns-coding-challenges.md', size: '~48KB' }
                             ]
                         },
                         'quiz': {
                             name: 'Quiz',
                             icon: '🎯',
                             files: [
-                                { name: 'java8-quiz.md', path: './Java8-Plus/quiz/java8-quiz.md', size: '~48KB' },
-                                { name: 'design-patterns-quiz.md', path: './Java8-Plus/quiz/design-patterns-quiz.md', size: '~42KB' }
+                                { name: 'java8-quiz.md', path: basePath + 'Java8-Plus/quiz/java8-quiz.md', size: '~48KB' },
+                                { name: 'design-patterns-quiz.md', path: basePath + 'Java8-Plus/quiz/design-patterns-quiz.md', size: '~42KB' }
                             ]
                         }
                     }
                 },
                 'Spring-Framework': {
                     name: 'Spring Framework',
-                    path: './Spring-Framework',
+                    path: basePath + 'Spring-Framework',
                     icon: '🍃',
                     folders: {
                         'notes': {
                             name: 'Notes',
                             icon: '📖',
                             files: [
-                                { name: '01-spring-fundamentals.md', path: './Spring-Framework/notes/01-spring-fundamentals.md', size: '~48KB' },
-                                { name: '02-dependency-injection.md', path: './Spring-Framework/notes/02-dependency-injection.md', size: '~52KB' },
-                                { name: '03-aop-and-transactions.md', path: './Spring-Framework/notes/03-aop-and-transactions.md', size: '~45KB' },
-                                { name: '13-enterprise-architecture.md', path: './Spring-Framework/notes/13-enterprise-architecture.md', size: '~58KB' }
+                                { name: '01-spring-fundamentals.md', path: basePath + 'Spring-Framework/notes/01-spring-fundamentals.md', size: '~48KB' },
+                                { name: '02-dependency-injection.md', path: basePath + 'Spring-Framework/notes/02-dependency-injection.md', size: '~52KB' },
+                                { name: '03-aop-and-transactions.md', path: basePath + 'Spring-Framework/notes/03-aop-and-transactions.md', size: '~45KB' },
+                                { name: '13-enterprise-architecture.md', path: basePath + 'Spring-Framework/notes/13-enterprise-architecture.md', size: '~58KB' }
                             ]
                         },
                         'interview-questions': {
                             name: 'Interview Prep',
                             icon: '🎤',
                             files: [
-                                { name: 'spring-interview-questions.md', path: './Spring-Framework/interview-questions/spring-interview-questions.md', size: '~45KB' }
+                                { name: 'spring-interview-questions.md', path: basePath + 'Spring-Framework/interview-questions/spring-interview-questions.md', size: '~45KB' }
                             ]
                         },
                         'real-problems': {
                             name: 'Coding Challenges',
                             icon: '💻',
                             files: [
-                                { name: 'spring-coding-challenges.md', path: './Spring-Framework/real-problems/spring-coding-challenges.md', size: '~52KB' }
+                                { name: 'spring-coding-challenges.md', path: basePath + 'Spring-Framework/real-problems/spring-coding-challenges.md', size: '~52KB' }
                             ]
                         },
                         'quiz': {
                             name: 'Quiz',
                             icon: '🎯',
                             files: [
-                                { name: 'spring-quiz.md', path: './Spring-Framework/quiz/spring-quiz.md', size: '~38KB' }
+                                { name: 'spring-quiz.md', path: basePath + 'Spring-Framework/quiz/spring-quiz.md', size: '~38KB' }
                             ]
                         }
                     }
                 },
                 'Oracle-SQL': {
                     name: 'Oracle SQL',
-                    path: './Oracle-SQL',
+                    path: basePath + 'Oracle-SQL',
                     icon: '🗄️',
                     folders: {
                         'notes': {
                             name: 'Notes',
                             icon: '📖',
                             files: [
-                                { name: '01-sql-fundamentals-and-dml.md', path: './Oracle-SQL/notes/01-sql-fundamentals-and-dml.md', size: '~55KB' },
-                                { name: '02-advanced-queries-and-subqueries.md', path: './Oracle-SQL/notes/02-advanced-queries-and-subqueries.md', size: '~62KB' },
-                                { name: '03-window-functions-and-analytics.md', path: './Oracle-SQL/notes/03-window-functions-and-analytics.md', size: '~58KB' },
-                                { name: '04-optimization-and-execution-plans.md', path: './Oracle-SQL/notes/04-optimization-and-execution-plans.md', size: '~64KB' },
-                                { name: '05-plsql-and-advanced-features.md', path: './Oracle-SQL/notes/05-plsql-and-advanced-features.md', size: '~70KB' }
+                                { name: '01-sql-fundamentals-and-dml.md', path: basePath + 'Oracle-SQL/notes/01-sql-fundamentals-and-dml.md', size: '~55KB' },
+                                { name: '02-advanced-queries-and-subqueries.md', path: basePath + 'Oracle-SQL/notes/02-advanced-queries-and-subqueries.md', size: '~62KB' },
+                                { name: '03-window-functions-and-analytics.md', path: basePath + 'Oracle-SQL/notes/03-window-functions-and-analytics.md', size: '~58KB' },
+                                { name: '04-optimization-and-execution-plans.md', path: basePath + 'Oracle-SQL/notes/04-optimization-and-execution-plans.md', size: '~64KB' },
+                                { name: '05-plsql-and-advanced-features.md', path: basePath + 'Oracle-SQL/notes/05-plsql-and-advanced-features.md', size: '~70KB' }
                             ]
                         },
                         'questions': {
                             name: 'Questions',
                             icon: '❓',
                             files: [
-                                { name: 'oracle-sql-conceptual-questions.md', path: './Oracle-SQL/questions/oracle-sql-conceptual-questions.md', size: '~28KB' }
+                                { name: 'oracle-sql-conceptual-questions.md', path: basePath + 'Oracle-SQL/questions/oracle-sql-conceptual-questions.md', size: '~28KB' }
                             ]
                         },
                         'quiz': {
                             name: 'Quiz',
                             icon: '🎯',
                             files: [
-                                { name: 'oracle-sql-quiz.md', path: './Oracle-SQL/quiz/oracle-sql-quiz.md', size: '~45KB' }
+                                { name: 'oracle-sql-quiz.md', path: basePath + 'Oracle-SQL/quiz/oracle-sql-quiz.md', size: '~45KB' }
                             ]
                         },
                         'real-problems': {
                             name: 'Coding Challenges',
                             icon: '💻',
                             files: [
-                                { name: 'oracle-sql-coding-challenges.md', path: './Oracle-SQL/real-problems/oracle-sql-coding-challenges.md', size: '~52KB' }
+                                { name: 'oracle-sql-coding-challenges.md', path: basePath + 'Oracle-SQL/real-problems/oracle-sql-coding-challenges.md', size: '~52KB' }
                             ]
                         },
                         'interview-questions': {
                             name: 'Interview Prep',
                             icon: '🎤',
                             files: [
-                                { name: 'oracle-sql-interview-questions.md', path: './Oracle-SQL/interview-questions/oracle-sql-interview-questions.md', size: '~48KB' }
+                                { name: 'oracle-sql-interview-questions.md', path: basePath + 'Oracle-SQL/interview-questions/oracle-sql-interview-questions.md', size: '~48KB' }
                             ]
                         }
                     }
