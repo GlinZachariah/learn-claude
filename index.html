@@ -41,6 +41,17 @@
             height: 100vh;
         }
 
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            color: var(--text-dark);
+        }
+
         /* Sidebar Styling */
         .sidebar {
             width: var(--sidebar-width);
@@ -50,6 +61,7 @@
             flex-direction: column;
             overflow: hidden;
             box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
         }
 
         .sidebar-header {
@@ -189,6 +201,15 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .breadcrumb {
@@ -197,6 +218,7 @@
             align-items: center;
             font-size: 0.9rem;
             color: var(--text-light);
+            flex-wrap: wrap;
         }
 
         .breadcrumb span {
@@ -211,6 +233,77 @@
             display: flex;
             gap: 10px;
             align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: var(--bg-light);
+            border-color: var(--primary-color);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: var(--bg-white);
+            min-width: 250px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1000;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            max-height: 400px;
+            overflow-y: auto;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: var(--text-dark);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            padding-left: 24px;
+        }
+
+        .dropdown-item.active {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
         }
 
         .btn {
@@ -241,6 +334,11 @@
             border-color: var(--secondary-color);
         }
 
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
         .theme-toggle {
             width: 40px;
             height: 40px;
@@ -250,6 +348,13 @@
             justify-content: center;
             font-size: 1.2rem;
             cursor: pointer;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-white);
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-light);
         }
 
         /* Content Display Area */
@@ -287,6 +392,7 @@
             gap: 15px;
             font-size: 0.85rem;
             color: var(--text-light);
+            flex-wrap: wrap;
         }
 
         .content-meta-item {
@@ -301,199 +407,150 @@
             padding: 25px;
         }
 
-        /* Markdown Content Styling */
-        .markdown-content h1 {
-            font-size: 2rem;
-            margin: 30px 0 20px 0;
-            color: var(--text-dark);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-
-        .markdown-content h1:first-child {
-            margin-top: 0;
-        }
-
-        .markdown-content h2 {
-            font-size: 1.5rem;
-            margin: 25px 0 15px 0;
-            color: var(--text-dark);
-        }
-
-        .markdown-content h3 {
-            font-size: 1.2rem;
-            margin: 20px 0 10px 0;
-            color: var(--text-dark);
-        }
-
-        .markdown-content h4 {
-            font-size: 1rem;
-            margin: 15px 0 8px 0;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .markdown-content p {
-            line-height: 1.7;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-
-        .markdown-content ul, .markdown-content ol {
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-
-        .markdown-content li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-
-        .markdown-content code {
+        .content-footer {
+            padding: 20px 25px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background-color: var(--bg-light);
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--danger-color);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .markdown-content pre {
-            background-color: var(--bg-light);
+        .chapter-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .chapter-nav-button {
+            padding: 10px 20px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        .markdown-content pre code {
-            background-color: transparent;
-            padding: 0;
+            background-color: var(--bg-white);
             color: var(--text-dark);
-            font-size: 0.85rem;
-        }
-
-        .markdown-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
             font-size: 0.9rem;
         }
 
-        .markdown-content table th {
+        .chapter-nav-button:hover:not(:disabled) {
             background-color: var(--primary-color);
             color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
+            border-color: var(--primary-color);
         }
 
-        .markdown-content table td {
-            border: 1px solid var(--border-color);
-            padding: 12px;
+        .chapter-nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .markdown-content table tr:nth-child(even) {
-            background-color: var(--bg-light);
+        .chapter-nav-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
-        .markdown-content blockquote {
-            border-left: 4px solid var(--primary-color);
-            padding: 12px 15px;
-            background-color: var(--bg-light);
-            margin-bottom: 15px;
-            border-radius: 4px;
+        /* Markdown Styling */
+        .markdown h1 {
+            font-size: 2rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
 
-        .markdown-content a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.2s;
-            border-bottom: 1px solid transparent;
-        }
-
-        .markdown-content a:hover {
-            color: var(--secondary-color);
-            border-bottom-color: var(--secondary-color);
-        }
-
-        .markdown-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            margin: 15px 0;
-            box-shadow: var(--shadow);
-        }
-
-        .markdown-content hr {
-            border: none;
-            border-top: 2px solid var(--border-color);
-            margin: 30px 0;
-        }
-
-        .markdown-content strong {
-            font-weight: 600;
+        .markdown h2 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 0.8rem;
             color: var(--text-dark);
         }
 
-        /* Sidebar Panel */
-        .sidebar-panel {
-            width: 320px;
-            background-color: var(--bg-white);
-            border-left: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin: 15px 15px 15px 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: var(--shadow);
+        .markdown h3 {
+            font-size: 1.25rem;
+            margin: 1.2rem 0 0.6rem;
+            color: var(--text-dark);
         }
 
-        .sidebar-panel-header {
-            padding: 15px;
-            background: linear-gradient(135deg, var(--accent-color), #f97316);
-            color: white;
-            border-bottom: 1px solid var(--border-color);
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .sidebar-panel-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-        }
-
-        .toc-item {
-            padding: 8px 12px;
-            margin-bottom: 5px;
-            border-left: 3px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-light);
-            font-size: 0.85rem;
-            border-radius: 4px;
-        }
-
-        .toc-item:hover {
+        .markdown code {
             background-color: var(--bg-light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--danger-color);
+            font-size: 0.9em;
+        }
+
+        .markdown pre {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .markdown pre code {
+            background-color: transparent;
+            color: #f3f4f6;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        .markdown table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .markdown table th,
+        .markdown table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .markdown table th {
+            background-color: var(--bg-light);
+            font-weight: 600;
+        }
+
+        .markdown blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            margin: 1rem 0;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .markdown ul,
+        .markdown ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .markdown li {
+            margin: 0.5rem 0;
+        }
+
+        .markdown a {
             color: var(--primary-color);
-            border-left-color: var(--primary-color);
+            text-decoration: none;
         }
 
-        .toc-item.level-2 {
-            padding-left: 20px;
+        .markdown a:hover {
+            text-decoration: underline;
         }
 
-        .toc-item.level-3 {
-            padding-left: 32px;
+        /* Help Message */
+        .help-content {
+            max-width: 1000px;
         }
 
-        .toc-item.level-4 {
-            padding-left: 44px;
+        .help-content h2 {
+            margin-top: 1.5rem;
         }
 
         /* Empty State */
@@ -508,225 +565,210 @@
         }
 
         .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            opacity: 0.3;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
 
-        .empty-state h3 {
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            height: 4px;
-            background-color: var(--bg-light);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
-            transition: width 0.3s;
-        }
-
-        /* Status Badge */
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status-badge.pending {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-
-        .status-badge.in-progress {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-
-        .status-badge.completed {
-            background-color: #dcfce7;
-            color: #166534;
-        }
-
-        /* Loading State */
-        .loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-
-        .loading-spinner {
-            border: 4px solid var(--bg-light);
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-light);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-light);
-        }
-
-        /* Dark Mode */
-        body.dark-mode {
-            --bg-light: #1f2937;
-            --bg-white: #111827;
-            --text-dark: #f3f4f6;
-            --text-light: #9ca3af;
-            --border-color: #374151;
-        }
-
-        body.dark-mode .sidebar-item:hover {
-            background-color: rgba(37, 99, 235, 0.2);
+        .empty-state-text {
+            font-size: 1.1rem;
         }
 
         /* Responsive Design */
-        @media (max-width: 1200px) {
-            .sidebar-panel {
-                display: none;
-            }
-        }
-
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                z-index: 999;
+                transform: translateX(-100%);
+                width: 100%;
+                max-width: 300px;
             }
 
-            .sidebar {
-                width: 100%;
-                height: 200px;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .container.sidebar-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 998;
             }
 
             .content-area {
-                flex-direction: column;
+                gap: 10px;
             }
 
             .content-panel {
                 margin: 10px;
             }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            .header-controls {
+                width: 100%;
+            }
+
+            .breadcrumb {
+                font-size: 0.8rem;
+            }
+
+            .content-body {
+                padding: 15px;
+                font-size: 0.95rem;
+            }
+
+            .content-header {
+                padding: 15px;
+            }
+
+            .content-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .content-footer {
+                padding: 15px;
+                flex-direction: column;
+            }
+
+            .chapter-nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .chapter-nav-button {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+                flex: 1;
+                min-width: 100px;
+            }
+
+            .dropdown-menu {
+                min-width: 200px;
+            }
+
+            .markdown h1 {
+                font-size: 1.5rem;
+            }
+
+            .markdown h2 {
+                font-size: 1.25rem;
+            }
+
+            .markdown h3 {
+                font-size: 1.1rem;
+            }
+
+            .markdown code {
+                font-size: 0.85em;
+            }
+
+            .markdown pre {
+                font-size: 0.75rem;
+                padding: 10px;
+            }
         }
 
-        /* Search Results Highlight */
-        .search-highlight {
-            background-color: var(--accent-color);
-            padding: 2px 4px;
-            border-radius: 2px;
-            font-weight: 600;
-        }
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 15px;
+            }
 
-        /* Subject Stats */
-        .subject-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-            font-size: 0.85rem;
-        }
+            .content-panel {
+                margin: 5px;
+            }
 
-        .stat-item {
-            background-color: var(--bg-light);
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
+            .content-body {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
 
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
+            .content-header h2 {
+                font-size: 1.2rem;
+            }
 
-        .stat-label {
-            color: var(--text-light);
-            margin-top: 5px;
+            .dropdown-menu {
+                min-width: 150px;
+            }
+
+            .sidebar-header h1 {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="container">
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <h1>📚 Learning Hub</h1>
-                <p>Master Your Skills</p>
+                <p>Study Notes & Materials</p>
             </div>
-
             <div class="sidebar-search">
                 <input type="text" id="sidebarSearch" placeholder="Search subjects...">
             </div>
-
-            <div class="sidebar-content" id="sidebarContent">
-                <!-- Subjects will be loaded here -->
-            </div>
+            <div class="sidebar-content" id="sidebarContent"></div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Header -->
+            <!-- Header with Dropdowns -->
             <div class="header">
-                <div class="breadcrumb" id="breadcrumb">
-                    <span>Learning Hub</span>
+                <div class="header-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+                    <div class="breadcrumb" id="breadcrumb"></div>
                 </div>
                 <div class="header-controls">
-                    <button class="btn" id="downloadBtn" style="display:none;">⬇ Download</button>
-                    <button class="btn" id="printBtn" style="display:none;">🖨 Print</button>
-                    <div class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">🌙</div>
+                    <!-- Subject Dropdown -->
+                    <div class="dropdown" id="subjectDropdown">
+                        <button class="dropdown-toggle" id="subjectToggle">📖 Select Subject</button>
+                        <div class="dropdown-menu" id="subjectMenu"></div>
+                    </div>
+
+                    <!-- Chapter Dropdown -->
+                    <div class="dropdown" id="chapterDropdown">
+                        <button class="dropdown-toggle" id="chapterToggle">📄 Select Chapter</button>
+                        <div class="dropdown-menu" id="chapterMenu"></div>
+                    </div>
+
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
                 </div>
             </div>
 
             <!-- Content Area -->
             <div class="content-area">
-                <div class="content-panel" id="contentPanel">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📖</div>
-                        <h3>Welcome to Learning Hub</h3>
-                        <p>Select a subject and file from the left to get started</p>
+                <div class="content-panel">
+                    <div class="content-header" id="contentHeader">
+                        <h2 id="contentTitle">Welcome</h2>
+                        <div class="content-meta" id="contentMeta"></div>
                     </div>
-                </div>
-
-                <!-- Right Sidebar - Table of Contents -->
-                <div class="sidebar-panel" id="tocPanel">
-                    <div class="sidebar-panel-header">📑 Table of Contents</div>
-                    <div class="sidebar-panel-content" id="tocContent">
-                        <p style="color: var(--text-light); font-size: 0.85rem; text-align: center;">
-                            Select a file to view its contents
-                        </p>
+                    <div class="content-body markdown" id="contentBody"></div>
+                    <div class="content-footer" id="contentFooter">
+                        <div class="chapter-nav-info" id="chapterInfo"></div>
+                        <div class="chapter-nav">
+                            <button class="chapter-nav-button" id="prevChapter">← Previous</button>
+                            <button class="chapter-nav-button" id="nextChapter">Next →</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -734,87 +776,67 @@
     </div>
 
     <script>
-        // Application State
+        // State management
         const state = {
-            subjects: {},
             currentSubject: null,
             currentFile: null,
-            darkMode: localStorage.getItem('darkMode') === 'true',
-            subjectStatus: JSON.parse(localStorage.getItem('subjectStatus') || '{}'),
-            quizScores: JSON.parse(localStorage.getItem('quizScores') || '{}'),
-            expandedSubjects: JSON.parse(localStorage.getItem('expandedSubjects') || '{}')
+            currentFileIndex: 0,
+            currentFolderType: null,
+            subjects: {},
+            isDarkMode: localStorage.getItem('darkMode') === 'true'
         };
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            applyTheme();
+        // Initialize dashboard
+        function init() {
             loadSubjects();
             setupEventListeners();
-        });
-
-        // Theme Management
-        function applyTheme() {
-            if (state.darkMode) {
-                document.body.classList.add('dark-mode');
-                document.getElementById('themeToggle').textContent = '☀️';
-            }
+            applyTheme();
+            showHelpMessage();
         }
 
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            state.darkMode = !state.darkMode;
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', state.darkMode);
-            document.getElementById('themeToggle').textContent = state.darkMode ? '☀️' : '🌙';
-        });
-
-        // Setup Event Listeners
-        function setupEventListeners() {
-            document.getElementById('sidebarSearch').addEventListener('input', (e) => {
-                filterSubjects(e.target.value);
-            });
-        }
-
-        // Load Subjects
-        async function loadSubjects() {
-            try {
-                const response = await fetch('.', { method: 'GET' });
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-
-                // Extract subject folders
-                const links = doc.querySelectorAll('a');
-                const subjects = [];
-
-                for (const link of links) {
-                    const href = link.getAttribute('href');
-                    if (href && !href.includes('.') && !href.includes('..') &&
-                        href.endsWith('/') && href !== './') {
-                        const name = href.replace(/\/$/, '');
-                        if (name.charAt(0) !== '.') {
-                            subjects.push(name);
+        // Setup subjects data
+        function loadSubjects() {
+            state.subjects = {
+                'React-TypeScript': {
+                    name: 'React & TypeScript',
+                    path: './React-TypeScript',
+                    icon: '⚛️',
+                    folders: {
+                        'notes': {
+                            name: 'Notes',
+                            icon: '📖',
+                            files: [
+                                { name: '01-react-fundamentals.md', path: './React-TypeScript/notes/01-react-fundamentals.md', size: '~45KB' },
+                                { name: '02-advanced-patterns.md', path: './React-TypeScript/notes/02-advanced-patterns.md', size: '~52KB' },
+                                { name: '03-performance-optimization.md', path: './React-TypeScript/notes/03-performance-optimization.md', size: '~48KB' },
+                                { name: '04-testing-strategies.md', path: './React-TypeScript/notes/04-testing-strategies.md', size: '~42KB' },
+                                { name: '05-deployment-best-practices.md', path: './React-TypeScript/notes/05-deployment-best-practices.md', size: '~38KB' },
+                                { name: '09-enterprise-react-architecture.md', path: './React-TypeScript/notes/09-enterprise-react-architecture.md', size: '~62KB' }
+                            ]
+                        },
+                        'interview-questions': {
+                            name: 'Interview Prep',
+                            icon: '🎤',
+                            files: [
+                                { name: 'react-typescript-interview-questions.md', path: './React-TypeScript/interview-questions/react-typescript-interview-questions.md', size: '~38KB' }
+                            ]
+                        },
+                        'real-problems': {
+                            name: 'Coding Challenges',
+                            icon: '💻',
+                            files: [
+                                { name: 'react-typescript-coding-challenges.md', path: './React-TypeScript/real-problems/react-typescript-coding-challenges.md', size: '~48KB' }
+                            ]
+                        },
+                        'quiz': {
+                            name: 'Quiz',
+                            icon: '🎯',
+                            files: [
+                                { name: 'react-typescript-quiz.md', path: './React-TypeScript/quiz/react-typescript-quiz.md', size: '~44KB' }
+                            ]
                         }
                     }
-                }
-
-                // If no subjects found, show instructions
-                if (subjects.length === 0) {
-                    displayLocalSubjects();
-                } else {
-                    for (const subject of subjects) {
-                        await loadSubjectStructure(subject);
-                    }
-                    renderSubjects();
-                }
-            } catch (error) {
-                console.warn('Could not load from server, using local mock data');
-                displayLocalSubjects();
-            }
-        }
-
-        // Display Mock Subjects for Testing
-        function displayLocalSubjects() {
-            state.subjects = {
+                },
                 'Java8-Plus': {
                     name: 'Java 8+',
                     path: './Java8-Plus',
@@ -824,54 +846,34 @@
                             name: 'Notes',
                             icon: '📖',
                             files: [
-                                { name: '01-java8-fundamentals.md', path: './Java8-Plus/notes/01-java8-fundamentals.md', size: '~25KB' },
-                                { name: '02-streams-api-deep-dive.md', path: './Java8-Plus/notes/02-streams-api-deep-dive.md', size: '~20KB' },
-                                { name: '03-java9-to-java21-features.md', path: './Java8-Plus/notes/03-java9-to-java21-features.md', size: '~22KB' },
-                                { name: '04-completable-future.md', path: './Java8-Plus/notes/04-completable-future.md', size: '~30KB' },
-                                { name: '05-caching-strategies.md', path: './Java8-Plus/notes/05-caching-strategies.md', size: '~28KB' },
-                                { name: '06-thread-safety.md', path: './Java8-Plus/notes/06-thread-safety.md', size: '~35KB' },
-                                { name: '07-time-operations.md', path: './Java8-Plus/notes/07-time-operations.md', size: '~32KB' },
-                                { name: '08-advanced-completable-future-patterns.md', path: './Java8-Plus/notes/08-advanced-completable-future-patterns.md', size: '~40KB' },
-                                { name: '09-reactive-programming.md', path: './Java8-Plus/notes/09-reactive-programming.md', size: '~35KB' },
-                                { name: '10-distributed-caching-consistency.md', path: './Java8-Plus/notes/10-distributed-caching-consistency.md', size: '~38KB' },
-                                { name: '11-cache-performance-tuning.md', path: './Java8-Plus/notes/11-cache-performance-tuning.md', size: '~30KB' },
-                                { name: '12-advanced-cache-patterns.md', path: './Java8-Plus/notes/12-advanced-cache-patterns.md', size: '~25KB' },
-                                { name: '13-concurrent-collections-performance.md', path: './Java8-Plus/notes/13-concurrent-collections-performance.md', size: '~28KB' },
-                                { name: '14-time-operations-at-scale.md', path: './Java8-Plus/notes/14-time-operations-at-scale.md', size: '~32KB' },
-                                { name: '15-monitoring-observability-debugging.md', path: './Java8-Plus/notes/15-monitoring-observability-debugging.md', size: '~36KB' },
-                                { name: '16-design-patterns-in-java8-plus.md', path: './Java8-Plus/notes/16-design-patterns-in-java8-plus.md', size: '~42KB' }
-                            ]
-                        },
-                        'questions': {
-                            name: 'Questions',
-                            icon: '❓',
-                            files: [
-                                { name: 'java8-questions.md', path: './Java8-Plus/questions/java8-questions.md', size: '~15KB' }
-                            ]
-                        },
-                        'quiz': {
-                            name: 'Quiz',
-                            icon: '🎯',
-                            files: [
-                                { name: 'java8-quiz.md', path: './Java8-Plus/quiz/java8-quiz.md', size: '~8KB' },
-                                { name: 'design-patterns-quiz.md', path: './Java8-Plus/quiz/design-patterns-quiz.md', size: '~42KB' }
-                            ]
-                        },
-                        'real-problems': {
-                            name: 'Real Problems',
-                            icon: '💻',
-                            files: [
-                                { name: 'coding-problems.md', path: './Java8-Plus/real-problems/coding-problems.md', size: '~18KB' },
-                                { name: 'design-patterns-coding-challenges.md', path: './Java8-Plus/real-problems/design-patterns-coding-challenges.md', size: '~48KB' }
+                                { name: '01-java8-fundamentals.md', path: './Java8-Plus/notes/01-java8-fundamentals.md', size: '~50KB' },
+                                { name: '02-streams-api-deep-dive.md', path: './Java8-Plus/notes/02-streams-api-deep-dive.md', size: '~55KB' },
+                                { name: '03-java9-to-java21-features.md', path: './Java8-Plus/notes/03-java9-to-java21-features.md', size: '~65KB' },
+                                { name: '16-design-patterns.md', path: './Java8-Plus/notes/16-design-patterns.md', size: '~34KB' }
                             ]
                         },
                         'interview-questions': {
                             name: 'Interview Prep',
                             icon: '🎤',
                             files: [
-                                { name: 'java8-interviews.md', path: './Java8-Plus/interview-questions/java8-interviews.md', size: '~25KB' },
-                                { name: 'expert-architect-questions.md', path: './Java8-Plus/interview-questions/expert-architect-questions.md', size: '~40KB' },
+                                { name: 'java8-interview-questions.md', path: './Java8-Plus/interview-questions/java8-interview-questions.md', size: '~42KB' },
                                 { name: 'design-patterns-interview-questions.md', path: './Java8-Plus/interview-questions/design-patterns-interview-questions.md', size: '~32KB' }
+                            ]
+                        },
+                        'real-problems': {
+                            name: 'Coding Challenges',
+                            icon: '💻',
+                            files: [
+                                { name: 'java8-coding-challenges.md', path: './Java8-Plus/real-problems/java8-coding-challenges.md', size: '~55KB' },
+                                { name: 'design-patterns-coding-challenges.md', path: './Java8-Plus/real-problems/design-patterns-coding-challenges.md', size: '~48KB' }
+                            ]
+                        },
+                        'quiz': {
+                            name: 'Quiz',
+                            icon: '🎯',
+                            files: [
+                                { name: 'java8-quiz.md', path: './Java8-Plus/quiz/java8-quiz.md', size: '~48KB' },
+                                { name: 'design-patterns-quiz.md', path: './Java8-Plus/quiz/design-patterns-quiz.md', size: '~42KB' }
                             ]
                         }
                     }
@@ -879,161 +881,37 @@
                 'Spring-Framework': {
                     name: 'Spring Framework',
                     path: './Spring-Framework',
-                    icon: '🌱',
+                    icon: '🍃',
                     folders: {
                         'notes': {
                             name: 'Notes',
                             icon: '📖',
                             files: [
-                                { name: '01-fundamentals-and-core-concepts.md', path: './Spring-Framework/notes/01-fundamentals-and-core-concepts.md', size: '~45KB' },
-                                { name: '02-dependency-injection-and-ioc-container.md', path: './Spring-Framework/notes/02-dependency-injection-and-ioc-container.md', size: '~40KB' },
-                                { name: '03-spring-web-mvc.md', path: './Spring-Framework/notes/03-spring-web-mvc.md', size: '~38KB' },
-                                { name: '04-spring-boot-essentials.md', path: './Spring-Framework/notes/04-spring-boot-essentials.md', size: '~32KB' },
-                                { name: '05-data-access-and-jpa.md', path: './Spring-Framework/notes/05-data-access-and-jpa.md', size: '~42KB' },
-                                { name: '06-rest-apis-and-web-services.md', path: './Spring-Framework/notes/06-rest-apis-and-web-services.md', size: '~35KB' },
-                                { name: '07-security-and-authentication.md', path: './Spring-Framework/notes/07-security-and-authentication.md', size: '~38KB' },
-                                { name: '08-transactions-and-persistence-patterns.md', path: './Spring-Framework/notes/08-transactions-and-persistence-patterns.md', size: '~30KB' },
-                                { name: '09-aop-and-cross-cutting-concerns.md', path: './Spring-Framework/notes/09-aop-and-cross-cutting-concerns.md', size: '~28KB' },
-                                { name: '10-testing-and-quality-assurance.md', path: './Spring-Framework/notes/10-testing-and-quality-assurance.md', size: '~32KB' },
-                                { name: '11-performance-and-optimization.md', path: './Spring-Framework/notes/11-performance-and-optimization.md', size: '~30KB' },
-                                { name: '12-cloud-and-microservices-integration.md', path: './Spring-Framework/notes/12-cloud-and-microservices-integration.md', size: '~32KB' },
-                                { name: '13-enterprise-architecture-patterns.md', path: './Spring-Framework/notes/13-enterprise-architecture-patterns.md', size: '~58KB' }
-                            ]
-                        },
-                        'questions': {
-                            name: 'Questions',
-                            icon: '❓',
-                            files: [
-                                { name: 'conceptual-questions.md', path: './Spring-Framework/questions/conceptual-questions.md', size: '~48KB' }
-                            ]
-                        },
-                        'quiz': {
-                            name: 'Quiz',
-                            icon: '🎯',
-                            files: [
-                                { name: 'spring-framework-quiz.md', path: './Spring-Framework/quiz/spring-framework-quiz.md', size: '~42KB' },
-                                { name: 'spring-architecture-quiz.md', path: './Spring-Framework/quiz/spring-architecture-quiz.md', size: '~38KB' }
-                            ]
-                        },
-                        'real-problems': {
-                            name: 'Real Problems',
-                            icon: '💻',
-                            files: [
-                                { name: 'coding-challenges.md', path: './Spring-Framework/real-problems/coding-challenges.md', size: '~65KB' },
-                                { name: 'spring-architecture-coding-challenges.md', path: './Spring-Framework/real-problems/spring-architecture-coding-challenges.md', size: '~52KB' }
+                                { name: '01-spring-fundamentals.md', path: './Spring-Framework/notes/01-spring-fundamentals.md', size: '~48KB' },
+                                { name: '02-dependency-injection.md', path: './Spring-Framework/notes/02-dependency-injection.md', size: '~52KB' },
+                                { name: '03-aop-and-transactions.md', path: './Spring-Framework/notes/03-aop-and-transactions.md', size: '~45KB' },
+                                { name: '13-enterprise-architecture.md', path: './Spring-Framework/notes/13-enterprise-architecture.md', size: '~58KB' }
                             ]
                         },
                         'interview-questions': {
                             name: 'Interview Prep',
                             icon: '🎤',
                             files: [
-                                { name: 'interview-prep.md', path: './Spring-Framework/interview-questions/interview-prep.md', size: '~55KB' },
-                                { name: 'expert-architecture-questions.md', path: './Spring-Framework/interview-questions/expert-architecture-questions.md', size: '~62KB' },
-                                { name: 'spring-architecture-interview-questions.md', path: './Spring-Framework/interview-questions/spring-architecture-interview-questions.md', size: '~45KB' }
-                            ]
-                        }
-                    }
-                },
-                'Web-Technologies': {
-                    name: 'Web Technologies',
-                    path: './Web-Technologies',
-                    icon: '🌐',
-                    folders: {
-                        'notes': {
-                            name: 'Notes',
-                            icon: '📖',
-                            files: [
-                                { name: '01-html-fundamentals.md', path: './Web-Technologies/notes/01-html-fundamentals.md', size: '~50KB' },
-                                { name: '02-html-advanced.md', path: './Web-Technologies/notes/02-html-advanced.md', size: '~42KB' },
-                                { name: '03-css-fundamentals.md', path: './Web-Technologies/notes/03-css-fundamentals.md', size: '~48KB' },
-                                { name: '04-css-advanced.md', path: './Web-Technologies/notes/04-css-advanced.md', size: '~45KB' },
-                                { name: '05-javascript-fundamentals.md', path: './Web-Technologies/notes/05-javascript-fundamentals.md', size: '~52KB' },
-                                { name: '06-javascript-advanced.md', path: './Web-Technologies/notes/06-javascript-advanced.md', size: '~48KB' },
-                                { name: '07-typescript-fundamentals.md', path: './Web-Technologies/notes/07-typescript-fundamentals.md', size: '~45KB' },
-                                { name: '08-typescript-advanced.md', path: './Web-Technologies/notes/08-typescript-advanced.md', size: '~42KB' }
+                                { name: 'spring-interview-questions.md', path: './Spring-Framework/interview-questions/spring-interview-questions.md', size: '~45KB' }
                             ]
                         },
-                        'questions': {
-                            name: 'Questions',
-                            icon: '❓',
+                        'real-problems': {
+                            name: 'Coding Challenges',
+                            icon: '💻',
                             files: [
-                                { name: 'conceptual-questions.md', path: './Web-Technologies/questions/conceptual-questions.md', size: '~42KB' }
+                                { name: 'spring-coding-challenges.md', path: './Spring-Framework/real-problems/spring-coding-challenges.md', size: '~52KB' }
                             ]
                         },
                         'quiz': {
                             name: 'Quiz',
                             icon: '🎯',
                             files: [
-                                { name: 'web-technologies-quiz.md', path: './Web-Technologies/quiz/web-technologies-quiz.md', size: '~78KB' }
-                            ]
-                        },
-                        'real-problems': {
-                            name: 'Real Problems',
-                            icon: '💻',
-                            files: [
-                                { name: 'coding-challenges.md', path: './Web-Technologies/real-problems/coding-challenges.md', size: '~85KB' }
-                            ]
-                        },
-                        'interview-questions': {
-                            name: 'Interview Prep',
-                            icon: '🎤',
-                            files: [
-                                { name: 'interview-prep.md', path: './Web-Technologies/interview-questions/interview-prep.md', size: '~95KB' },
-                                { name: 'expert-architecture-questions.md', path: './Web-Technologies/interview-questions/expert-architecture-questions.md', size: '~88KB' }
-                            ]
-                        }
-                    }
-                },
-                'React-TypeScript': {
-                    name: 'React with TypeScript',
-                    path: './React-TypeScript',
-                    icon: '⚛️',
-                    folders: {
-                        'notes': {
-                            name: 'Notes',
-                            icon: '📖',
-                            files: [
-                                { name: '01-react-fundamentals-with-typescript.md', path: './React-TypeScript/notes/01-react-fundamentals-with-typescript.md', size: '~25KB' },
-                                { name: '02-advanced-react-patterns.md', path: './React-TypeScript/notes/02-advanced-react-patterns.md', size: '~18KB' },
-                                { name: '03-state-management-with-react.md', path: './React-TypeScript/notes/03-state-management-with-react.md', size: '~15KB' },
-                                { name: '04-react-router-and-navigation.md', path: './React-TypeScript/notes/04-react-router-and-navigation.md', size: '~11KB' },
-                                { name: '05-forms-and-data-handling.md', path: './React-TypeScript/notes/05-forms-and-data-handling.md', size: '~12KB' },
-                                { name: '06-testing-react-components.md', path: './React-TypeScript/notes/06-testing-react-components.md', size: '~11KB' },
-                                { name: '07-performance-and-optimization.md', path: './React-TypeScript/notes/07-performance-and-optimization.md', size: '~12KB' },
-                                { name: '08-advanced-patterns-and-architecture.md', path: './React-TypeScript/notes/08-advanced-patterns-and-architecture.md', size: '~15KB' },
-                                { name: '09-enterprise-react-architecture.md', path: './React-TypeScript/notes/09-enterprise-react-architecture.md', size: '~62KB' }
-                            ]
-                        },
-                        'questions': {
-                            name: 'Questions',
-                            icon: '❓',
-                            files: [
-                                { name: '01-conceptual-questions.md', path: './React-TypeScript/questions/01-conceptual-questions.md', size: '~39KB' }
-                            ]
-                        },
-                        'quiz': {
-                            name: 'Quiz',
-                            icon: '🎯',
-                            files: [
-                                { name: '01-self-assessment-quiz.md', path: './React-TypeScript/quiz/01-self-assessment-quiz.md', size: '~54KB' },
-                                { name: 'react-architecture-quiz.md', path: './React-TypeScript/quiz/react-architecture-quiz.md', size: '~42KB' }
-                            ]
-                        },
-                        'real-problems': {
-                            name: 'Real Problems',
-                            icon: '💻',
-                            files: [
-                                { name: '01-coding-challenges.md', path: './React-TypeScript/real-problems/01-coding-challenges.md', size: '~58KB' },
-                                { name: 'react-architecture-coding-challenges.md', path: './React-TypeScript/real-problems/react-architecture-coding-challenges.md', size: '~48KB' }
-                            ]
-                        },
-                        'interview-questions': {
-                            name: 'Interview Prep',
-                            icon: '🎤',
-                            files: [
-                                { name: '01-interview-prep.md', path: './React-TypeScript/interview-questions/01-interview-prep.md', size: '~44KB' },
-                                { name: '02-expert-architecture-patterns.md', path: './React-TypeScript/interview-questions/02-expert-architecture-patterns.md', size: '~35KB' },
-                                { name: 'react-architecture-interview-questions.md', path: './React-TypeScript/interview-questions/react-architecture-interview-questions.md', size: '~38KB' }
+                                { name: 'spring-quiz.md', path: './Spring-Framework/quiz/spring-quiz.md', size: '~38KB' }
                             ]
                         }
                     }
@@ -1069,7 +947,7 @@
                             ]
                         },
                         'real-problems': {
-                            name: 'Real Problems',
+                            name: 'Coding Challenges',
                             icon: '💻',
                             files: [
                                 { name: 'oracle-sql-coding-challenges.md', path: './Oracle-SQL/real-problems/oracle-sql-coding-challenges.md', size: '~52KB' }
@@ -1086,407 +964,370 @@
                 }
             };
 
-            renderSubjects();
-            showHelpMessage();
+            renderSidebar();
+            renderSubjectDropdown();
         }
 
-        function showHelpMessage() {
-            const help = `
-                <h2>Welcome to Learning Hub 📚</h2>
-                <p>This is a comprehensive learning platform for managing your study materials.</p>
+        // Render sidebar
+        function renderSidebar() {
+            const sidebar = document.getElementById('sidebarContent');
+            sidebar.innerHTML = '';
 
-                <h3>Getting Started:</h3>
-                <ol>
-                    <li><strong>Add Subjects:</strong> Create folders in the main directory for each subject</li>
-                    <li><strong>Organize Content:</strong> Use the standard folder structure:
-                        <ul>
-                            <li><code>notes/</code> - Learning materials</li>
-                            <li><code>questions/</code> - Conceptual Q&A</li>
-                            <li><code>quiz/</code> - Self-assessment</li>
-                            <li><code>real-problems/</code> - Coding exercises</li>
-                            <li><code>interview-questions/</code> - Interview prep</li>
-                        </ul>
-                    </li>
-                    <li><strong>View Content:</strong> Click on any markdown file to preview</li>
-                </ol>
-
-                <h3>Features:</h3>
-                <ul>
-                    <li>📖 Full markdown rendering with syntax highlighting</li>
-                    <li>🌙 Dark mode toggle for comfortable reading</li>
-                    <li>📑 Auto-generated table of contents</li>
-                    <li>🔍 Search across subjects</li>
-                    <li>📊 Progress tracking</li>
-                    <li>🖨️ Print and download support</li>
-                </ul>
-
-                <h3>Tips:</h3>
-                <ul>
-                    <li>Use the breadcrumb navigation at the top to see your current location</li>
-                    <li>Click on headings in the table of contents to jump to sections</li>
-                    <li>Toggle dark mode for late-night studying (moon icon ☀️/🌙)</li>
-                    <li>Search in the sidebar to quickly find subjects</li>
-                </ul>
-
-                <h3>Example Subject Structure:</h3>
-                <pre><code>learn-claude/
-├── Java8-Plus/
-│   ├── notes/
-│   │   ├── 01-java8-fundamentals.md
-│   │   ├── 02-streams-api-deep-dive.md
-│   │   └── 03-java9-to-java21-features.md
-│   ├── questions/
-│   │   └── java8-questions.md
-│   ├── quiz/
-│   │   └── java8-quiz.md
-│   ├── real-problems/
-│   │   └── coding-problems.md
-│   ├── interview-questions/
-│   │   └── java8-interviews.md
-│   ├── img/
-│   └── README.md
-└── index.html (this file)</code></pre>
-
-                <p><strong>🚀 Ready to learn? Select a subject from the left sidebar to begin!</strong></p>
-            `;
-
-            displayContent('Welcome', help, 'home');
-        }
-
-        // Load Subject Structure
-        async function loadSubjectStructure(subjectName) {
-            const subjectPath = `./${subjectName}`;
-            state.subjects[subjectName] = {
-                name: subjectName,
-                path: subjectPath,
-                icon: getIconForSubject(subjectName),
-                folders: {}
-            };
-
-            const folderNames = ['notes', 'questions', 'quiz', 'real-problems', 'interview-questions'];
-
-            for (const folderName of folderNames) {
-                try {
-                    const response = await fetch(`${subjectPath}/${folderName}/`);
-                    if (response.ok) {
-                        const html = await response.text();
-                        const files = extractFilesFromHTML(html, subjectPath, folderName);
-                        state.subjects[subjectName].folders[folderName] = {
-                            name: capitalizeFolder(folderName),
-                            icon: getIconForFolder(folderName),
-                            files: files
-                        };
-                    }
-                } catch (error) {
-                    console.log(`Could not load ${folderName} for ${subjectName}`);
-                }
-            }
-        }
-
-        function extractFilesFromHTML(html, subjectPath, folderName) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const files = [];
-
-            const links = doc.querySelectorAll('a');
-            for (const link of links) {
-                const href = link.getAttribute('href');
-                if (href && href.endsWith('.md')) {
-                    files.push({
-                        name: href,
-                        path: `${subjectPath}/${folderName}/${href}`
-                    });
-                }
-            }
-
-            return files;
-        }
-
-        function getIconForSubject(name) {
-            const icons = {
-                'Java8-Plus': '☕',
-                'Python': '🐍',
-                'JavaScript': '📜',
-                'Web-Development': '🌐',
-                'System-Design': '🏗️',
-                'Database': '🗄️',
-                'Algorithms': '⚙️'
-            };
-            return icons[name] || '📚';
-        }
-
-        function getIconForFolder(name) {
-            const icons = {
-                'notes': '📖',
-                'questions': '❓',
-                'quiz': '🎯',
-                'real-problems': '💻',
-                'interview-questions': '🎤'
-            };
-            return icons[name] || '📁';
-        }
-
-        function capitalizeFolder(name) {
-            return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        }
-
-        // Render Subjects
-        function renderSubjects() {
-            const container = document.getElementById('sidebarContent');
-            container.innerHTML = '';
-
-            for (const [key, subject] of Object.entries(state.subjects)) {
-                const isExpanded = state.expandedSubjects[key] || false;
+            Object.entries(state.subjects).forEach(([key, subject]) => {
                 const subjectEl = document.createElement('div');
-                subjectEl.className = `subject-item ${state.currentSubject === key ? 'active' : ''} ${isExpanded ? 'expanded' : ''}`;
+                subjectEl.className = 'subject-item';
+                subjectEl.innerHTML = `
+                    <button class="subject-button" data-subject="${key}">
+                        <span>${subject.icon} ${subject.name}</span>
+                        <span class="subject-item-toggle">›</span>
+                    </button>
+                    <div class="subject-files">
+                        ${Object.entries(subject.folders).map(([folderKey, folder]) => `
+                            <div style="padding: 10px 15px; font-weight: 500; color: var(--text-light); font-size: 0.8rem; border-top: 1px solid var(--border-color);">
+                                ${folder.icon} ${folder.name}
+                            </div>
+                            ${folder.files.map(file => `
+                                <div class="file-item" data-path="${file.path}" data-subject="${key}" data-folder="${folderKey}">
+                                    ${file.name}
+                                </div>
+                            `).join('')}
+                        `).join('')}
+                    </div>
+                `;
 
-                const btn = document.createElement('button');
-                btn.innerHTML = `<span>${subject.icon} ${subject.name}</span><span class="subject-item-toggle">›</span>`;
-                btn.addEventListener('click', () => toggleSubject(key));
-                subjectEl.appendChild(btn);
+                const button = subjectEl.querySelector('.subject-button');
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    subjectEl.classList.toggle('expanded');
+                });
 
-                const filesEl = document.createElement('div');
-                filesEl.className = 'subject-files';
+                const fileItems = subjectEl.querySelectorAll('.file-item');
+                fileItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        loadFile(item.dataset.path, item.dataset.subject, item.dataset.folder);
+                        updateActiveFile(item);
+                        closeSidebarMobile();
+                    });
+                });
 
-                for (const [folderKey, folder] of Object.entries(subject.folders)) {
-                    if (folder.files.length > 0) {
-                        for (const file of folder.files) {
-                            const fileEl = document.createElement('div');
-                            fileEl.className = `file-item ${state.currentFile === file.path ? 'active' : ''}`;
-                            fileEl.innerHTML = `${folder.icon} ${file.name}`;
-                            fileEl.addEventListener('click', () => loadFile(key, folderKey, file));
-                            filesEl.appendChild(fileEl);
-                        }
-                    }
-                }
-
-                subjectEl.appendChild(filesEl);
-                container.appendChild(subjectEl);
-            }
+                sidebar.appendChild(subjectEl);
+            });
         }
 
-        // Toggle Subject Expansion
-        function toggleSubject(subjectKey) {
-            state.expandedSubjects[subjectKey] = !state.expandedSubjects[subjectKey];
-            localStorage.setItem('expandedSubjects', JSON.stringify(state.expandedSubjects));
-            renderSubjects();
-            selectSubject(subjectKey);
+        // Render subject dropdown
+        function renderSubjectDropdown() {
+            const menu = document.getElementById('subjectMenu');
+            menu.innerHTML = '';
+
+            Object.entries(state.subjects).forEach(([key, subject]) => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                item.textContent = `${subject.icon} ${subject.name}`;
+                item.addEventListener('click', () => {
+                    selectSubject(key, subject);
+                });
+                menu.appendChild(item);
+            });
         }
 
-        // Select Subject (show overview)
-        function selectSubject(subjectKey) {
-            state.currentSubject = subjectKey;
-            showSubjectOverview(subjectKey);
+        // Select subject
+        function selectSubject(key, subject) {
+            state.currentSubject = key;
+            document.getElementById('subjectToggle').textContent = `${subject.icon} ${subject.name}`;
+            closeDropdown('subjectDropdown');
+            renderChapterDropdown(subject);
+            updateBreadcrumb();
         }
 
-        // Show Subject Overview
-        function showSubjectOverview(subjectKey) {
-            const subject = state.subjects[subjectKey];
-            let html = `<h2>${subject.icon} ${subject.name}</h2>`;
+        // Render chapter dropdown
+        function renderChapterDropdown(subject) {
+            const menu = document.getElementById('chapterMenu');
+            menu.innerHTML = '';
 
-            // Subject stats
             let totalFiles = 0;
-            html += '<div class="subject-stats">';
-            for (const folder of Object.values(subject.folders)) {
-                const fileCount = folder.files.length;
-                totalFiles += fileCount;
-                html += `
-                    <div class="stat-item">
-                        <div class="stat-value">${fileCount}</div>
-                        <div class="stat-label">${folder.name}</div>
-                    </div>
-                `;
-            }
-            html += '</div>';
+            const allFiles = [];
 
-            // Folders overview
-            html += '<h3 style="margin-top: 30px;">Content</h3>';
-            html += '<ul>';
-            for (const [key, folder] of Object.entries(subject.folders)) {
-                if (folder.files.length > 0) {
-                    html += `<li><strong>${folder.icon} ${folder.name}</strong> (${folder.files.length} files)</li>`;
+            Object.entries(subject.folders).forEach(([folderKey, folder]) => {
+                const headerDiv = document.createElement('div');
+                headerDiv.style.cssText = 'padding: 10px 20px; font-weight: 600; background-color: var(--bg-light); font-size: 0.85rem;';
+                headerDiv.textContent = `${folder.icon} ${folder.name}`;
+                menu.appendChild(headerDiv);
+
+                folder.files.forEach(file => {
+                    const item = document.createElement('div');
+                    item.className = 'dropdown-item';
+                    item.textContent = file.name;
+                    item.addEventListener('click', () => {
+                        loadFile(file.path, state.currentSubject, folderKey);
+                        document.getElementById('chapterToggle').textContent = `📄 ${file.name}`;
+                        closeDropdown('chapterDropdown');
+                    });
+                    menu.appendChild(item);
+                    allFiles.push({ path: file.path, name: file.name, folder: folderKey });
+                });
+            });
+
+            state.chapters = allFiles;
+        }
+
+        // Load file content
+        function loadFile(path, subject, folderType) {
+            state.currentFile = path;
+            state.currentSubject = subject;
+            state.currentFolderType = folderType;
+
+            // Setup chapters array if not already done
+            if (!state.chapters || !Array.isArray(state.chapters) || state.chapters.length === 0) {
+                const subjectData = state.subjects[subject];
+                if (subjectData) {
+                    const allFiles = [];
+                    Object.entries(subjectData.folders).forEach(([folderKey, folder]) => {
+                        folder.files.forEach(file => {
+                            allFiles.push({ path: file.path, name: file.name, folder: folderKey });
+                        });
+                    });
+                    state.chapters = allFiles;
                 }
             }
-            html += '</ul>';
 
-            html += '<p style="margin-top: 20px; color: var(--text-light); font-size: 0.9rem;">Select a file from the sidebar to begin learning.</p>';
-
-            displayContent(`${subject.name} Overview`, html, 'overview');
-            document.getElementById('tocContent').innerHTML = '<p style="color: var(--text-light); font-size: 0.85rem; text-align: center;">Select a file to view its contents</p>';
-        }
-
-        // Load File
-        async function loadFile(subjectKey, folderKey, file) {
-            state.currentFile = file.path;
-
-            try {
-                // Try multiple paths
-                let markdown = null;
-                const pathsToTry = [
-                    file.path,
-                    `./${file.path.replace(/^\.\//, '')}`,
-                    `Java8-Plus/${folderKey}/${file.name}`
-                ];
-
-                for (const fetchPath of pathsToTry) {
-                    try {
-                        const response = await fetch(fetchPath);
-                        if (response.ok) {
-                            markdown = await response.text();
-                            break;
-                        }
-                    } catch (e) {
-                        // Continue to next path
-                        continue;
-                    }
-                }
-
-                if (!markdown) {
-                    throw new Error('Could not load file from any location');
-                }
-
-                const html = marked.parse(markdown);
-                const sanitized = DOMPurify.sanitize(html);
-
-                const subject = state.subjects[subjectKey];
-                const folderName = Object.values(subject.folders).find(f =>
-                    f.files.some(fl => fl.path === file.path)
-                ).name;
-
-                displayContent(file.name, sanitized, 'file');
-                updateBreadcrumb(subjectKey, folderName, file.name);
-                generateTableOfContents();
-            } catch (error) {
-                console.error('Load error:', error);
-                const errorMsg = `
-                    <h2>⚠️ Could Not Load File</h2>
-                    <p><strong>File:</strong> ${file.name}</p>
-                    <p><strong>Expected Location:</strong> Java8-Plus/${folderKey}/${file.name}</p>
-                    <h3>Possible Solutions:</h3>
-                    <ol>
-                        <li><strong>Check file exists:</strong> Verify the file is in the correct folder</li>
-                        <li><strong>Use local server:</strong>
-                            <ul>
-                                <li>Open terminal in learn-claude folder</li>
-                                <li>Run: <code>python -m http.server 8000</code></li>
-                                <li>Open: http://localhost:8000</li>
-                            </ul>
-                        </li>
-                        <li><strong>Check folder structure:</strong>
-                            <ul>
-                                <li>learn-claude/</li>
-                                <li>├── Java8-Plus/</li>
-                                <li>│   ├── notes/</li>
-                                <li>│   ├── questions/</li>
-                                <li>│   ├── quiz/</li>
-                                <li>│   ├── real-problems/</li>
-                                <li>│   └── interview-questions/</li>
-                                <li>└── index.html</li>
-                            </ul>
-                        </li>
-                        <li><strong>Check file permissions:</strong> Ensure file is readable</li>
-                    </ol>
-                    <p style="margin-top: 20px; color: #ef4444;"><strong>Note:</strong> Opening from file:// protocol has security restrictions. Use a local web server instead.</p>
-                `;
-                displayContent('Error Loading File', errorMsg, 'error');
-            }
-        }
-
-        // Display Content
-        function displayContent(title, html, type) {
-            const panel = document.getElementById('contentPanel');
-
-            let headerHTML = '';
-            if (type !== 'home') {
-                headerHTML = `
-                    <div class="content-header">
-                        <h2>${title}</h2>
-                        <div class="content-meta">
-                            <div class="content-meta-item">📄 ${type === 'file' ? 'Markdown Document' : 'Overview'}</div>
-                            <div class="content-meta-item">⏱️ Reading time: 10-15 min</div>
-                        </div>
-                    </div>
-                `;
+            // Find current file index in chapters array
+            if (state.chapters) {
+                state.currentFileIndex = state.chapters.findIndex(ch => ch.path === path);
             }
 
-            panel.innerHTML = `
-                ${headerHTML}
-                <div class="content-body">
-                    <div class="markdown-content">${html}</div>
-                </div>
-            `;
+            fetch(path)
+                .then(response => {
+                    if (!response.ok) throw new Error('File not found');
+                    return response.text();
+                })
+                .then(content => {
+                    const title = path.split('/').pop().replace('.md', '').replace(/-/g, ' ');
+                    document.getElementById('contentTitle').textContent = title;
 
-            // Show print and download buttons for files
-            document.getElementById('downloadBtn').style.display = type === 'file' ? 'block' : 'none';
-            document.getElementById('printBtn').style.display = type === 'file' ? 'block' : 'none';
+                    const html = DOMPurify.sanitize(marked(content));
+                    document.getElementById('contentBody').innerHTML = html;
 
-            // Add click handlers for download and print
-            document.getElementById('downloadBtn').onclick = () => downloadContent(title);
-            document.getElementById('printBtn').onclick = () => window.print();
+                    updateBreadcrumb();
+                    updateChapterNavigation();
+                    closeSidebarMobile();
+                })
+                .catch(error => {
+                    document.getElementById('contentBody').innerHTML = `<p>Error loading file: ${error.message}</p>`;
+                });
         }
 
-        // Update Breadcrumb
-        function updateBreadcrumb(subjectKey, folder, file) {
-            const subject = state.subjects[subjectKey];
-            const breadcrumb = document.getElementById('breadcrumb');
-            breadcrumb.innerHTML = `
-                <span style="cursor: pointer;" onclick="showHelpMessage()">${subject.icon} ${subject.name}</span>
-                <span class="breadcrumb-separator">/</span>
-                <span>${folder}</span>
-                <span class="breadcrumb-separator">/</span>
-                <span style="color: var(--primary-color);">${file}</span>
-            `;
-        }
+        // Update chapter navigation
+        function updateChapterNavigation() {
+            const prevBtn = document.getElementById('prevChapter');
+            const nextBtn = document.getElementById('nextChapter');
+            const info = document.getElementById('chapterInfo');
 
-        // Generate Table of Contents
-        function generateTableOfContents() {
-            const content = document.querySelector('.markdown-content');
-            const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-
-            const tocContent = document.getElementById('tocContent');
-            if (headings.length === 0) {
-                tocContent.innerHTML = '<p style="color: var(--text-light); font-size: 0.85rem;">No headings found</p>';
+            if (!state.chapters || state.chapters.length === 0) {
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                info.textContent = '';
                 return;
             }
 
-            let html = '';
-            let lastLevel = 0;
+            const total = state.chapters.length;
+            const current = state.currentFileIndex + 1;
 
-            headings.forEach((heading, index) => {
-                const level = parseInt(heading.tagName[1]);
-                const text = heading.textContent;
-                const id = `heading-${index}`;
-                heading.id = id;
+            info.textContent = `Chapter ${current} of ${total}`;
 
-                const levelClass = `level-${level}`;
-                html += `<div class="toc-item ${levelClass}" onclick="document.getElementById('${id}').scrollIntoView({behavior: 'smooth'})">${text}</div>`;
-            });
+            prevBtn.disabled = state.currentFileIndex <= 0;
+            nextBtn.disabled = state.currentFileIndex >= total - 1;
 
-            tocContent.innerHTML = html;
+            prevBtn.onclick = () => {
+                if (state.currentFileIndex > 0) {
+                    const prevFile = state.chapters[state.currentFileIndex - 1];
+                    loadFile(prevFile.path, state.currentSubject, prevFile.folder);
+                }
+            };
+
+            nextBtn.onclick = () => {
+                if (state.currentFileIndex < total - 1) {
+                    const nextFile = state.chapters[state.currentFileIndex + 1];
+                    loadFile(nextFile.path, state.currentSubject, nextFile.folder);
+                }
+            };
         }
 
-        // Filter Subjects
+        // Update active file in sidebar
+        function updateActiveFile(element) {
+            document.querySelectorAll('.file-item.active').forEach(el => {
+                el.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Update breadcrumb
+        function updateBreadcrumb() {
+            const breadcrumb = document.getElementById('breadcrumb');
+            breadcrumb.innerHTML = '';
+
+            if (state.currentSubject && state.subjects[state.currentSubject]) {
+                const subject = state.subjects[state.currentSubject];
+                const span = document.createElement('span');
+                span.textContent = subject.name;
+                breadcrumb.appendChild(span);
+
+                if (state.currentFile) {
+                    const sep = document.createElement('span');
+                    sep.className = 'breadcrumb-separator';
+                    sep.textContent = '/';
+                    breadcrumb.appendChild(sep);
+
+                    const fileName = state.currentFile.split('/').pop().replace('.md', '');
+                    const span2 = document.createElement('span');
+                    span2.textContent = fileName;
+                    breadcrumb.appendChild(span2);
+                }
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Dropdown toggles
+            document.getElementById('subjectToggle').addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleDropdown('subjectDropdown');
+            });
+
+            document.getElementById('chapterToggle').addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleDropdown('chapterDropdown');
+            });
+
+            // Close dropdowns on outside click
+            document.addEventListener('click', () => {
+                closeAllDropdowns();
+            });
+
+            // Mobile menu toggle
+            document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('mobile-open');
+                document.getElementById('container').classList.toggle('sidebar-open');
+            });
+
+            // Theme toggle
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+            // Search
+            document.getElementById('sidebarSearch').addEventListener('input', (e) => {
+                filterSubjects(e.target.value);
+            });
+        }
+
+        // Dropdown functions
+        function toggleDropdown(dropdownId) {
+            document.getElementById(dropdownId).classList.toggle('active');
+        }
+
+        function closeDropdown(dropdownId) {
+            document.getElementById(dropdownId).classList.remove('active');
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        }
+
+        function closeSidebarMobile() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('mobile-open');
+                document.getElementById('container').classList.remove('sidebar-open');
+            }
+        }
+
+        // Filter subjects
         function filterSubjects(query) {
             const items = document.querySelectorAll('.subject-item');
-            const lowerQuery = query.toLowerCase();
-
             items.forEach(item => {
                 const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(lowerQuery) ? 'block' : 'none';
+                item.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
             });
         }
 
-        // Download Content
-        function downloadContent(title) {
-            const content = document.querySelector('.markdown-content').innerText;
-            const element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-            element.setAttribute('download', title.replace('.md', '.txt'));
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
+        // Theme toggle
+        function toggleTheme() {
+            state.isDarkMode = !state.isDarkMode;
+            localStorage.setItem('darkMode', state.isDarkMode);
+            applyTheme();
         }
+
+        function applyTheme() {
+            if (state.isDarkMode) {
+                document.documentElement.style.setProperty('--bg-light', '#1f2937');
+                document.documentElement.style.setProperty('--bg-white', '#111827');
+                document.documentElement.style.setProperty('--text-dark', '#f3f4f6');
+                document.documentElement.style.setProperty('--text-light', '#d1d5db');
+                document.documentElement.style.setProperty('--border-color', '#374151');
+                document.getElementById('themeToggle').textContent = '☀️';
+            } else {
+                document.documentElement.style.setProperty('--bg-light', '#f9fafb');
+                document.documentElement.style.setProperty('--bg-white', '#ffffff');
+                document.documentElement.style.setProperty('--text-dark', '#1f2937');
+                document.documentElement.style.setProperty('--text-light', '#6b7280');
+                document.documentElement.style.setProperty('--border-color', '#e5e7eb');
+                document.getElementById('themeToggle').textContent = '🌙';
+            }
+        }
+
+        // Show help message
+        function showHelpMessage() {
+            const helpContent = `
+                <div class="help-content">
+                    <h2>Welcome to Learning Hub 📚</h2>
+                    <p>This is a comprehensive learning platform for managing your study materials.</p>
+
+                    <h2>Getting Started:</h2>
+                    <ol>
+                        <li><strong>Select Subject:</strong> Use the Subject dropdown to choose a topic</li>
+                        <li><strong>Select Chapter:</strong> Use the Chapter dropdown to pick a specific chapter or material</li>
+                        <li><strong>Read Content:</strong> View the content in the main area</li>
+                        <li><strong>Navigate:</strong> Use Previous/Next buttons at the bottom to move between chapters</li>
+                    </ol>
+
+                    <h2>Features:</h2>
+                    <ul>
+                        <li>📖 Full markdown rendering with syntax highlighting</li>
+                        <li>🌙 Dark mode toggle for comfortable reading</li>
+                        <li>📱 Mobile-friendly responsive design with dropdown navigation</li>
+                        <li>🔍 Search across subjects in the sidebar</li>
+                        <li>⌨️ Quick chapter navigation with Previous/Next buttons</li>
+                        <li>📋 Breadcrumb navigation showing your location</li>
+                    </ul>
+
+                    <h2>Navigation Options:</h2>
+                    <ul>
+                        <li><strong>Desktop:</strong> Use sidebar for full navigation tree</li>
+                        <li><strong>Mobile:</strong> Use dropdown menus in header for quick selection</li>
+                        <li><strong>Chapter Navigation:</strong> Use Previous/Next buttons at bottom of each page</li>
+                    </ul>
+
+                    <h2>Tips:</h2>
+                    <ul>
+                        <li>Toggle the menu icon (☰) on mobile to open/close the sidebar</li>
+                        <li>Toggle dark mode with the 🌙/☀️ button for comfortable studying</li>
+                        <li>Use search in the sidebar to quickly find subjects</li>
+                        <li>Chapter navigation helps you progress through materials sequentially</li>
+                    </ul>
+
+                    <h2>Study Subjects:</h2>
+                    <ul>
+                        <li><strong>⚛️ React & TypeScript</strong> - Modern frontend development</li>
+                        <li><strong>☕ Java 8+</strong> - Advanced Java programming</li>
+                        <li><strong>🍃 Spring Framework</strong> - Enterprise Java framework</li>
+                        <li><strong>🗄️ Oracle SQL</strong> - Database and SQL expertise</li>
+                    </ul>
+                </div>
+            `;
+
+            document.getElementById('contentBody').innerHTML = helpContent;
+            document.getElementById('contentTitle').textContent = 'Welcome to Learning Hub';
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>

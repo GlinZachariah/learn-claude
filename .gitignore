@@ -1,39 +1,52 @@
-# Memory files - internal project instructions
-.memory/
-
-# IDE and editor files
-.vscode/
-.idea/
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
 *.swp
 *.swo
 *~
-.DS_Store
 
-# Node modules
+# Windows
+Thumbs.db
+ehthumbs.db
+*.lnk
+
+# Linux
+.directory
+
+# IDE and Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.atom/
+.eclipse/
+
+# Node (if ever needed for build tools)
 node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
 
-# Build artifacts
-dist/
-build/
-*.o
-*.a
-*.so
+# Temporary files
+*.tmp
+*.temp
+.cache/
 
-# Logs
-*.log
-npm-debug.log*
+# OS-specific
+desktop.ini
 
-# Environment files
+# Environment variables
 .env
 .env.local
 .env.*.local
 
-# OS specific
-Thumbs.db
-.DS_Store
+# Memory files (internal project documentation)
+.memory/
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.egg-info/
+# Jekyll and GitHub Pages
+.jekyll-cache/
+.jekyll-metadata
+site/

@@ -1,0 +1,39 @@
+# Jekyll Configuration for GitHub Pages
+
+# Theme
+theme: jekyll-theme-minimal
+
+# Markdown processor
+markdown: kramdown
+
+# Liquid settings - disable Liquid processing in markdown files
+liquid:
+  error_mode: lax
+
+# Build settings
+exclude:
+  - .gitignore
+  - LICENSE
+  - README.md
+  - CONTRIBUTING.md
+  - GITHUB_PAGES_SETUP.md
+  - .memory
+
+# Keep files
+keep_files:
+  - .memory
+
+# Safe mode
+safe: false
+
+# Kramdown configuration to handle code properly
+kramdown:
+  input: GFM
+  hard_wrap: true
+  syntax_highlighter: rouge
+
+# Collections
+collections_dir: .
+
+# Disable Jekyll processing for markdown in code blocks
+excerpt_separator: <!-- more -->
