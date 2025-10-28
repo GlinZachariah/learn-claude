@@ -1112,7 +1112,7 @@
                     const title = path.split('/').pop().replace('.md', '').replace(/-/g, ' ');
                     document.getElementById('contentTitle').textContent = title;
 
-                    const html = DOMPurify.sanitize(marked(content));
+                    const html = DOMPurify.sanitize(marked.parse(content));
                     document.getElementById('contentBody').innerHTML = html;
 
                     updateBreadcrumb();
